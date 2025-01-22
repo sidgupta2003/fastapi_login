@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="products-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <ul>
+            <li><a href="/products">Show Products</a></li>
+            <li><a href="/products/create">Create Product</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="main-content">
+        <div class="product-container">
+            <h2>Products</h2>
+            <div class="product-grid">
+                {% for product in products %}
+                    <div class="product-item">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                        <p>{{ product.name }}</p>
+                        <p>Price: ${{ product.price }}</p>
+                        <form action="/get_product" method="post">
+                            <input type="hidden" name="id" value="{{ product.id }}">
+                            <button type="submit">Get</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
